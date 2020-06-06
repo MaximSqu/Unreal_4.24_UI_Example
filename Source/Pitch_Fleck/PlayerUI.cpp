@@ -1,8 +1,9 @@
 // Fill out your copyright notice in the Description page of Project Settings.
-#include "TimerManager.h"
+//#include "TimerManager.h"
+#include "PlayerUI.h"
 #include "Engine.h"
 #include "string"
-#include "PlayerUI.h"
+
 
 
 // Sets default values for this component's properties
@@ -23,14 +24,27 @@ void APlayerUI::BeginPlay()
 	
 	MaxPlayerStamina = 1000;
 	MaxPlayerHunger = 1000;
-	playerStamina = 1000;
+	playerStamina = 150;
 	playerHunger = 1000;
+
+	MaxPlayerTired = 1000;
+	CurrentPlayerTired = 1000;
+	playerTired = 1.0;//Percentage
 	myPos = GetActorLocation();
 	// ...
 	
 }
 
-
+void APlayerUI::ChangeTired(int change_)
+{
+	CurrentPlayerTired += change_;
+	
+	if (CurrentPlayerTired < 0)
+	{
+		CurrentPlayerTired = 0;
+	}
+	playerTired = CurrentPlayerTired / 1000.0;
+}
 void APlayerUI::ReduceStamina()
 {
 	FVector newPos = GetActorLocation();
@@ -41,16 +55,18 @@ void APlayerUI::ReduceStamina()
 		if (playerStamina < 0)
 		{
 			playerStamina = 0;
+			ChangeTired(-1);
 		}
 		myPos = newPos;
 	}
 }
 void APlayerUI::ChangeStaminaMomently(int staminaChange)
 {
-		playerStamina -= staminaChange;
+		playerStamina += staminaChange;
 		if (playerStamina < 0)
 		{
 			playerStamina = 0;
+			ChangeTired(staminaChange);
 		}
 }
 void APlayerUI::ReduceHunger()
