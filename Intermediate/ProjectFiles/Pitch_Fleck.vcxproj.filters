@@ -1,0 +1,85 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <None Include="..\..\Pitch_Fleck.uproject" />
+    <Filter Include="Source">
+      <UniqueIdentifier>{019248B0-3FF9-47BD-B2D4-69CF0A6DEC62}</UniqueIdentifier>
+    </Filter>
+    <None Include="..\..\Source\Pitch_Fleck.Target.cs">
+      <Filter>Source</Filter>
+    </None>
+    <None Include="..\..\Source\Pitch_FleckEditor.Target.cs">
+      <Filter>Source</Filter>
+    </None>
+    <None Include="..\..\.gitignore" />
+    <Filter Include="Config">
+      <UniqueIdentifier>{8212161F-8E0A-43BA-9A2B-BBAA6261B2F2}</UniqueIdentifier>
+    </Filter>
+    <None Include="..\..\Config\DefaultEditor.ini">
+      <Filter>Config</Filter>
+    </None>
+    <None Include="..\..\Config\DefaultEditorPerProjectUserSettings.ini">
+      <Filter>Config</Filter>
+    </None>
+    <None Include="..\..\Config\DefaultEngine.ini">
+      <Filter>Config</Filter>
+    </None>
+    <None Include="..\..\Config\DefaultGame.ini">
+      <Filter>Config</Filter>
+    </None>
+    <None Include="..\..\Config\DefaultInput.ini">
+      <Filter>Config</Filter>
+    </None>
+    <Filter Include="Source\Pitch_Fleck">
+      <UniqueIdentifier>{DF40B4D5-9C5F-4EB5-B162-8452B27E9B8B}</UniqueIdentifier>
+    </Filter>
+    <ClCompile Include="..\..\Source\Pitch_Fleck\LookObject.cpp">
+      <Filter>Source\Pitch_Fleck</Filter>
+    </ClCompile>
+    <ClInclude Include="..\..\Source\Pitch_Fleck\LookObject.h">
+      <Filter>Source\Pitch_Fleck</Filter>
+    </ClInclude>
+    <ClCompile Include="..\..\Source\Pitch_Fleck\MyClass.cpp">
+      <Filter>Source\Pitch_Fleck</Filter>
+    </ClCompile>
+    <ClInclude Include="..\..\Source\Pitch_Fleck\MyClass.h">
+      <Filter>Source\Pitch_Fleck</Filter>
+    </ClInclude>
+    <None Include="..\..\Source\Pitch_Fleck\Pitch_Fleck.Build.cs">
+      <Filter>Source\Pitch_Fleck</Filter>
+    </None>
+    <ClCompile Include="..\..\Source\Pitch_Fleck\Pitch_Fleck.cpp">
+      <Filter>Source\Pitch_Fleck</Filter>
+    </ClCompile>
+    <ClInclude Include="..\..\Source\Pitch_Fleck\Pitch_Fleck.h">
+      <Filter>Source\Pitch_Fleck</Filter>
+    </ClInclude>
+    <ClCompile Include="..\..\Source\Pitch_Fleck\PlayerCheckItem.cpp">
+      <Filter>Source\Pitch_Fleck</Filter>
+    </ClCompile>
+    <ClInclude Include="..\..\Source\Pitch_Fleck\PlayerCheckItem.h">
+      <Filter>Source\Pitch_Fleck</Filter>
+    </ClInclude>
+    <ClCompile Include="..\..\Source\Pitch_Fleck\PlayerUI.cpp">
+      <Filter>Source\Pitch_Fleck</Filter>
+    </ClCompile>
+    <ClInclude Include="..\..\Source\Pitch_Fleck\PlayerUI.h">
+      <Filter>Source\Pitch_Fleck</Filter>
+    </ClInclude>
+    <ClCompile Include="..\..\Source\Pitch_Fleck\SubWidget.cpp">
+      <Filter>Source\Pitch_Fleck</Filter>
+    </ClCompile>
+    <ClInclude Include="..\..\Source\Pitch_Fleck\SubWidget.h">
+      <Filter>Source\Pitch_Fleck</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Pitch_Fleck\Usable.h">
+      <Filter>Source\Pitch_Fleck</Filter>
+    </ClInclude>
+    <ClCompile Include="..\..\Source\Pitch_Fleck\UsableItem.cpp">
+      <Filter>Source\Pitch_Fleck</Filter>
+    </ClCompile>
+    <ClInclude Include="..\..\Source\Pitch_Fleck\UsableItem.h">
+      <Filter>Source\Pitch_Fleck</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>
