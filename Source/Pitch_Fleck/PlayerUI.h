@@ -2,7 +2,6 @@
 
 #pragma once
 #include "GameFramework/Character.h"
-//#include "CoreMinimal.h"
 #include "Components/ActorComponent.h"
 #include "PlayerUI.generated.h"
 
@@ -21,13 +20,17 @@ protected:
 	int MaxPlayerStamina, MaxPlayerHunger;
 	int MaxPlayerTired, CurrentPlayerTired;
 
+	int MaxPlayerHeals, CurrentPlayerHeals;
 	void ChangeTired(int change_);
+	void ChangeHeals(int change_);
 	// Called when the game starts
 	virtual void BeginPlay() override;
 
 
 public:	
 	//virtual void Tick(float DeltaTime) override;
+	UPROPERTY(BlueprintReadOnly)
+		float playerHeals;
 	UPROPERTY(BlueprintReadOnly)
 		float playerTired;
 	UPROPERTY(BlueprintReadOnly)

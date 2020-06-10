@@ -5,15 +5,23 @@
 #include "string"
 
 
-
 // Sets default values for this component's properties
 APlayerUI::APlayerUI()
 {
-	// Set this component to be initialized when the game starts, and to be ticked every frame.  You can turn these features
-	// off to improve performance if you don't need them.
-	//PrimaryComponentTick.bCanEverTick = true;
+	MaxPlayerStamina = 1000;
+	MaxPlayerHunger = 1000;
+	playerStamina = 150;
+	playerHunger = 1000;
 
-	// ...
+	MaxPlayerTired = 1000;
+	CurrentPlayerTired = 1000;
+
+	MaxPlayerHeals = 1000;
+	CurrentPlayerHeals = 150;
+
+	playerTired = 1.0;//Percentage
+	playerHeals = 1.0;//Percent
+	myPos = GetActorLocation();
 }
 
 
@@ -22,17 +30,20 @@ void APlayerUI::BeginPlay()
 {
 	Super::BeginPlay();
 	
-	MaxPlayerStamina = 1000;
-	MaxPlayerHunger = 1000;
-	playerStamina = 150;
-	playerHunger = 1000;
-
-	MaxPlayerTired = 1000;
-	CurrentPlayerTired = 1000;
-	playerTired = 1.0;//Percentage
-	myPos = GetActorLocation();
+	
 	// ...
 	
+}
+
+void APlayerUI::ChangeHeals(int change_)
+{
+	CurrentPlayerHeals += change_;
+
+	if (CurrentPlayerHeals < 0)
+	{
+		CurrentPlayerHeals = 0;
+	}
+	playerHeals = CurrentPlayerHeals / 1000.0;
 }
 
 void APlayerUI::ChangeTired(int change_)
@@ -77,5 +88,6 @@ void APlayerUI::ReduceHunger()
 	if (playerHunger < 0)
 	{
 		playerHunger = 0;
+		ChangeHeals(-1);
 	}
 }
