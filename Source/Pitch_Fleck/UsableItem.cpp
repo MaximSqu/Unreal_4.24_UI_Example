@@ -1,7 +1,7 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
-
 #include "UsableItem.h"
+#include "Kismet/KismetMathLibrary.h"
 
 // Sets default values for this component's properties
 AUsableItem::AUsableItem()
@@ -23,14 +23,28 @@ void AUsableItem::BeginPlay()
 	
 }
 
-void AUsableItem::EndFocus_Implementation()
+void AUsableItem::EndFocus_Implementation(AActor* widget3D)
 {
 	UE_LOG(LogWindows, Warning, TEXT("Endfocus"));
+	widget3D->SetActorHiddenInGame(true);
+	
 }
 
-void AUsableItem::StartFocus_Implementation()
+void AUsableItem::StartFocus_Implementation(AActor* widget3D)
 {
-	UE_LOG(LogWindows, Warning, TEXT("Startfocus"));
+	if (!widget3D)
+	{
+		UE_LOG(LogWindows, Warning, TEXT("ERROR! widget empty"));
+
+		return;
+	}
+	UE_LOG(LogWindows, Warning, TEXT("Startfocus, change widget loc"));
+	widget3D->SetActorLocation(GetActorLocation());
+	FVector MyCharacter = GetWorld()->GetFirstPlayerController()->GetPawn()->GetActorLocation();
+	FRotator setRotation = UKismetMathLibrary::FindLookAtRotation(GetActorLocation(), MyCharacter);
+	widget3D->SetActorRotation(setRotation, ETeleportType::TeleportPhysics);
+	//widget3D->SetActorHiddenInGames(false);
+
 }
 
 void AUsableItem::UseThis_Implementation()

@@ -38,9 +38,9 @@ public:
 	UPROPERTY(BlueprintReadOnly)
 		float playerHunger;
 	UFUNCTION(BlueprintCallable)
+		void ChangeStamina(int staminaChange);
+	UFUNCTION(BlueprintCallable)
+		void ChangeHunger(int hungerChange);
+	UFUNCTION(BlueprintCallable)
 		void ReduceStamina();
-	UFUNCTION(BlueprintCallable)
-		void ReduceHunger();
-	UFUNCTION(BlueprintCallable)
-		void ChangeStaminaMomently(int staminaChange);
 };

@@ -17,7 +17,7 @@ APlayerUI::APlayerUI()
 	CurrentPlayerTired = 1000;
 
 	MaxPlayerHeals = 1000;
-	CurrentPlayerHeals = 150;
+	CurrentPlayerHeals = 1000;
 
 	playerTired = 1.0;//Percentage
 	playerHeals = 1.0;//Percent
@@ -43,35 +43,29 @@ void APlayerUI::ChangeHeals(int change_)
 	{
 		CurrentPlayerHeals = 0;
 	}
-	playerHeals = CurrentPlayerHeals / 1000.0;
+	playerHeals = (float)CurrentPlayerHeals / (float)MaxPlayerHeals;
 }
 
 void APlayerUI::ChangeTired(int change_)
 {
+	FString str = FString::FromInt(change_);
+	UE_LOG(LogWindows, Warning, TEXT("change_ %s"), *str);
+
 	CurrentPlayerTired += change_;
 	
+	str = FString::FromInt(CurrentPlayerTired);
+	UE_LOG(LogWindows, Warning, TEXT("CurrentPlayerTired %s"), *str);
 	if (CurrentPlayerTired < 0)
 	{
 		CurrentPlayerTired = 0;
 	}
-	playerTired = CurrentPlayerTired / 1000.0;
+	
+
+	playerTired = (float)CurrentPlayerTired / (float)MaxPlayerTired;
+	
 }
-void APlayerUI::ReduceStamina()
-{
-	FVector newPos = GetActorLocation();
-	FString strPos = newPos.ToString();
-	if ((newPos - myPos).Size() > 200)
-	{
-		playerStamina --;
-		if (playerStamina < 0)
-		{
-			playerStamina = 0;
-			ChangeTired(-1);
-		}
-		myPos = newPos;
-	}
-}
-void APlayerUI::ChangeStaminaMomently(int staminaChange)
+
+void APlayerUI::ChangeStamina(int staminaChange)
 {
 		playerStamina += staminaChange;
 		if (playerStamina < 0)
@@ -80,14 +74,42 @@ void APlayerUI::ChangeStaminaMomently(int staminaChange)
 			ChangeTired(staminaChange);
 		}
 }
-void APlayerUI::ReduceHunger()
-{
-	int reduceHunger = 5 - playerStamina / (MaxPlayerStamina / 4);
 
-	playerHunger -= reduceHunger;
+void APlayerUI::ChangeHunger(int hungerChange)
+{
+	if (hungerChange == 0)
+	{
+		hungerChange =  (5 - playerStamina / (MaxPlayerStamina / 4)) * -1;
+		if (hungerChange > 4)
+			hungerChange = 4;
+	}
+
+	playerHunger += hungerChange;
 	if (playerHunger < 0)
 	{
 		playerHunger = 0;
-		ChangeHeals(-1);
+		ChangeHeals(hungerChange);
+	}
+	else if(playerHunger > CurrentPlayerHeals)
+	{
+		playerHunger = CurrentPlayerHeals;
+		//FString str = FString::FromInt(playerHeals);
+		//UE_LOG(LogWindows, Warning, TEXT("playerHeals %s"), *str);
+	}
+}
+
+void APlayerUI::ReduceStamina()
+{
+	FVector newPos = GetActorLocation();
+	FString strPos = newPos.ToString();
+	if ((newPos - myPos).Size() > 200)
+	{
+		playerStamina--;
+		if (playerStamina < 0)
+		{
+			playerStamina = 0;
+			ChangeTired(-1);
+		}
+		myPos = newPos;
 	}
 }

@@ -25,7 +25,10 @@ protected:
 	APlayerCameraManager* Camera;
 	UObject* focusedItem;
 public:	
-	// Called every frame
+	UPROPERTY(EditAnywhere)
+		AActor* Widget3D;
+	UPROPERTY(EditAnywhere)
+		int itemUseDist;
 	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
 	UFUNCTION(BlueprintCallable)
 		void UseFocusedItem();

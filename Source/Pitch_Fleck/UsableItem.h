@@ -23,6 +23,6 @@ protected:
 
 public:	
 		void UseThis_Implementation() override;
-		void StartFocus_Implementation() override;
-		void EndFocus_Implementation() override;
+		void StartFocus_Implementation(AActor* widget3D) override;
+		void EndFocus_Implementation(AActor* widget3D) override;
 };

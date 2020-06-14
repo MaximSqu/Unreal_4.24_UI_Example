@@ -47,23 +47,35 @@ void UPlayerCheckItem::TickComponent(float DeltaTime, ELevelTick TickType, FActo
 
 	FVector position = Camera->GetCameraLocation();
 	FVector forward = Camera->GetActorForwardVector();
+	UE_LOG(LogWindows, Warning, TEXT("try focus"));
 
-	if (GetWorld()->LineTraceSingleByChannel(OutHit, position, position + forward * 500, ECC_Visibility, CollisionParams))
+	if (GetWorld()->LineTraceSingleByChannel(OutHit, position, position + forward * itemUseDist, ECC_Visibility, CollisionParams))
 	{
 		UClass* CastClass = OutHit.GetActor()->GetClass();
+		UE_LOG(LogWindows, Warning, TEXT("focus"));
 
-		if (CastClass->ImplementsInterface(UUsable::StaticClass()))
+		if (focusedItem != OutHit.GetActor() && CastClass->ImplementsInterface(UUsable::StaticClass()))
 		{
+			if (focusedItem)//Если смена фокуса на другой предмет
+			{
+				IUsable::Execute_EndFocus(focusedItem, Widget3D);
+				//Widget3D->SetActorLocation(FVector(0, 0, -1090));//hidden
+
+			}
+
 			focusedItem = OutHit.GetActor();
+
+			IUsable::Execute_StartFocus(focusedItem, Widget3D);
+
 			//UE_LOG(LogWindows, Warning, TEXT("Focus on: %s and Interface is: %s"), OutHit.GetActor()->GetName(), focusedItem);
 		}
-		else
-		{
-			focusedItem = nullptr;
-		}
+
 	}
-	else
+	else if(focusedItem)
 	{
+		IUsable::Execute_EndFocus(focusedItem, Widget3D);
+		//Widget3D->SetActorLocation(FVector(0, 0, -1090));//Hidden
+
 		focusedItem = nullptr;
 
 	}
