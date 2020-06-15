@@ -80,8 +80,8 @@ void APlayerUI::ChangeHunger(int hungerChange)
 	if (hungerChange == 0)
 	{
 		hungerChange =  (5 - playerStamina / (MaxPlayerStamina / 4)) * -1;
-		if (hungerChange > 4)
-			hungerChange = 4;
+		if (hungerChange < -4)
+			hungerChange = -4;
 	}
 
 	playerHunger += hungerChange;

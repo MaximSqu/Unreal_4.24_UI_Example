@@ -37,6 +37,15 @@ void UPlayerCheckItem::UseFocusedItem()
 		IUsable::Execute_UseThis(focusedItem);
 	}
 }
+void UPlayerCheckItem::StopUseFocusedItem()
+{
+	if (focusedItem)
+	{
+		UE_LOG(LogWindows, Warning, TEXT("Already"));
+		//focusedItem->UseThis();
+		IUsable::Execute_StopUseThis(focusedItem);
+	}
+}
 
 // Called every frame
 void UPlayerCheckItem::TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction)
@@ -47,25 +56,24 @@ void UPlayerCheckItem::TickComponent(float DeltaTime, ELevelTick TickType, FActo
 
 	FVector position = Camera->GetCameraLocation();
 	FVector forward = Camera->GetActorForwardVector();
-	UE_LOG(LogWindows, Warning, TEXT("try focus"));
 
 	if (GetWorld()->LineTraceSingleByChannel(OutHit, position, position + forward * itemUseDist, ECC_Visibility, CollisionParams))
 	{
 		UClass* CastClass = OutHit.GetActor()->GetClass();
-		UE_LOG(LogWindows, Warning, TEXT("focus"));
+		//UE_LOG(LogWindows, Warning, TEXT("focus"));
 
-		if (focusedItem != OutHit.GetActor() && CastClass->ImplementsInterface(UUsable::StaticClass()))
+		if (CastClass->ImplementsInterface(UUsable::StaticClass()))
 		{
-			if (focusedItem)//Если смена фокуса на другой предмет
+			if (focusedItem && focusedItem != OutHit.GetActor())//Если смена фокуса на другой предмет
 			{
-				IUsable::Execute_EndFocus(focusedItem, Widget3D);
+				IUsable::Execute_EndFocus(focusedItem);
 				//Widget3D->SetActorLocation(FVector(0, 0, -1090));//hidden
 
 			}
 
 			focusedItem = OutHit.GetActor();
 
-			IUsable::Execute_StartFocus(focusedItem, Widget3D);
+			IUsable::Execute_StartFocus(focusedItem);
 
 			//UE_LOG(LogWindows, Warning, TEXT("Focus on: %s and Interface is: %s"), OutHit.GetActor()->GetName(), focusedItem);
 		}
@@ -73,7 +81,7 @@ void UPlayerCheckItem::TickComponent(float DeltaTime, ELevelTick TickType, FActo
 	}
 	else if(focusedItem)
 	{
-		IUsable::Execute_EndFocus(focusedItem, Widget3D);
+		IUsable::Execute_EndFocus(focusedItem);
 		//Widget3D->SetActorLocation(FVector(0, 0, -1090));//Hidden
 
 		focusedItem = nullptr;

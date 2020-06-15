@@ -21,7 +21,9 @@ public:
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
 		void UseThis();
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
-		void StartFocus(AActor* widget3D);
+		void StopUseThis();
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
-		void EndFocus(AActor* widget3D);
+		void StartFocus();
+	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
+		void EndFocus();
 };

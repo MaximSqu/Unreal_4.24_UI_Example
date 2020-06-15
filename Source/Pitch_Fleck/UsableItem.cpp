@@ -23,16 +23,16 @@ void AUsableItem::BeginPlay()
 	
 }
 
-void AUsableItem::EndFocus_Implementation(AActor* widget3D)
+void AUsableItem::EndFocus_Implementation()
 {
 	UE_LOG(LogWindows, Warning, TEXT("Endfocus"));
-	widget3D->SetActorHiddenInGame(true);
+	//widget3D->SetActorHiddenInGame(true);
 	
 }
 
-void AUsableItem::StartFocus_Implementation(AActor* widget3D)
+void AUsableItem::StartFocus_Implementation()
 {
-	if (!widget3D)
+	/*if (!widget3D)
 	{
 		UE_LOG(LogWindows, Warning, TEXT("ERROR! widget empty"));
 
@@ -44,7 +44,7 @@ void AUsableItem::StartFocus_Implementation(AActor* widget3D)
 	FRotator setRotation = UKismetMathLibrary::FindLookAtRotation(GetActorLocation(), MyCharacter);
 	widget3D->SetActorRotation(setRotation, ETeleportType::TeleportPhysics);
 	//widget3D->SetActorHiddenInGames(false);
-
+	*/
 }
 
 void AUsableItem::UseThis_Implementation()
@@ -52,3 +52,7 @@ void AUsableItem::UseThis_Implementation()
 	UE_LOG(LogWindows, Warning, TEXT("Used from CPP"));
 }
 
+void AUsableItem::StopUseThis_Implementation()
+{
+	UE_LOG(LogWindows, Warning, TEXT("Stop Used from CPP"));
+}

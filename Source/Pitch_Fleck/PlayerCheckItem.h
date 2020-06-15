@@ -32,4 +32,6 @@ public:
 	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
 	UFUNCTION(BlueprintCallable)
 		void UseFocusedItem();
+	UFUNCTION(BlueprintCallable)
+		void StopUseFocusedItem();
 };
