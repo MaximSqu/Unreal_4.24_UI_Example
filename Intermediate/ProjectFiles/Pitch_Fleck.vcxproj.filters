@@ -82,4 +82,14 @@
       <Filter>Source\Pitch_Fleck</Filter>
     </ClInclude>
   </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\Source\Pitch_Fleck\PitchGameInstance.h">
+      <Filter>Source\Pitch_Fleck</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\Source\Pitch_Fleck\PitchGameInstance.cpp">
+      <Filter>Source\Pitch_Fleck</Filter>
+    </ClCompile>
+  </ItemGroup>
 </Project>
